@@ -1,3 +1,19 @@
+---
+layout: post
+title: "JS 설문조사 개선하기"
+date: 2015-02-08T20:39:51-09:00
+modified: 2015-02-08T22:21:31-09:00
+categories: articles
+excerpt: "JS 설문조사 개선하기"
+tags: [oowgnod]
+image:
+  feature: test.jpg
+  credit: Me
+  creditlink: me.org
+share: true
+comments: true
+---
+
 회사 면접을 준비하며 이전에 만들었던 토이 프로젝트의 코드들을 살펴보는 도중 의문이 생겼습니다.
 
 다른 면접에서 해당 프로젝트의 물품이 많아지면 어떻게 개선할 수 있는지에 대해 질문이 왔었는데 
