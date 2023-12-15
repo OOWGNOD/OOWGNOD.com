@@ -388,24 +388,8 @@ console.log(lastIndex);
 
 [https://javascript.plainenglish.io/7-javascript-powerful-optimization-tricks-you-need-to-know-f0b5da2933de](https://javascript.plainenglish.io/7-javascript-powerful-optimization-tricks-you-need-to-know-f0b5da2933de)
 
- [7 JavaScript Powerful Optimization Tricks You Need To Know
-
-Every language has uniqueness, and JavaScript, the most widely used programming language, is no different.
-
-javascript.plainenglish.io](https://javascript.plainenglish.io/7-javascript-powerful-optimization-tricks-you-need-to-know-f0b5da2933de)
-
 [https://developer.mozilla.org/ko/docs/Web/JavaScript/Guide/Expressions\_and\_operators](https://developer.mozilla.org/ko/docs/Web/JavaScript/Guide/Expressions_and_operators)
-
- [표현식과 연산자 - JavaScript | MDN
-
-이번 장에서는 JavaScript의 표현식과 함께 할당, 비교, 산술, 비트 계산, 논리, 문자열, 삼항 등 다양한 연산자를 살펴보겠습니다.
-
-developer.mozilla.org](https://developer.mozilla.org/ko/docs/Web/JavaScript/Guide/Expressions_and_operators)
 
 [https://www.blog.duomly.com/13-useful-javascript-array-tips-and-tricks-you-should-know/?fbclid=IwAR3YuEviqaZ1ergMhmh3wxM6arYpReKpPFMpDhn4cpjOmeUlIVk0ymXq3-0](https://www.blog.duomly.com/13-useful-javascript-array-tips-and-tricks-you-should-know/?fbclid=IwAR3YuEviqaZ1ergMhmh3wxM6arYpReKpPFMpDhn4cpjOmeUlIVk0ymXq3-0 "13 Useful JavaScript Array Tips and Tricks You Should Know")
 
- [13 useful JavaScript array tips and tricks you should know
-
-Today we will talk about javascript array tips and tricks. I would like to show you a few tricks which you may not know about and which may
-
-www.blog.duomly.com](https://www.blog.duomly.com/13-useful-javascript-array-tips-and-tricks-you-should-know/?fbclid=IwAR3YuEviqaZ1ergMhmh3wxM6arYpReKpPFMpDhn4cpjOmeUlIVk0ymXq3-0)
+[www.blog.duomly.com](https://www.blog.duomly.com/13-useful-javascript-array-tips-and-tricks-you-should-know/?fbclid=IwAR3YuEviqaZ1ergMhmh3wxM6arYpReKpPFMpDhn4cpjOmeUlIVk0ymXq3-0)
