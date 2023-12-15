@@ -1,0 +1,427 @@
+---
+layout: post
+title: "Javascript 코드 최적화 트릭"
+date: 2015-02-08T20:39:51-09:00
+modified: 2015-02-08T22:21:31-09:00
+categories: articles
+excerpt: "Javascript 코드 최적화 트릭"
+tags: [oowgnod]
+image:
+  feature: test.jpg
+  credit: Me
+  creditlink: me.org
+share: true
+comments: true
+---
+
+---
+
+## **1\. 대안 값 (Fallback Values)**
+
+조정된 값을 표시할 대안 위치 
+
+만약 값이 빈 배열 (\[\]) 이거나 0이라면, 논리 연산자 OR (||)를 사용하여 기대하는 결과를 얻을 수 없습니다.
+
+좀 더 좋은 해결책은 Nullish Coalescing Operator (??)를 사용하는 것입니다.
+
+이는  만약 정의된 값이 null 이거나 undefined 라면, 대안 값을 사용하도록 하는것입니다.
+
+```
+// Lengthy
+let name; 
+if (user?.name ) { 
+  name = user.name ; 
+} else { 
+  name = "Anonymous" ; 
+} 
+
+// Shotly
+const name = user?.name ?? "Anonymous" ;
+```
+
+---
+
+## **2\. 간단한 스위칭 (Shortly For Switching)**
+
+긴 스위치 케이스는 스위치 역할을 하는 키와 반환 값을 담은 객체를 사용하여 간단하게 최대한 줄일 수 있습니다.
+
+```
+const dayNumber = new Date().getDay();
+
+// Lengthy
+let day; 
+switch (dayNumber) { 
+	case 0:
+		day = "일요일"; 
+		break; 
+	case 1: 
+    	day = "월요일"; 
+		break; 
+	case 2: 
+    	day = "화요일"; 
+		break; 
+	case 3: 
+    	day = "수요일"; 
+		break; 
+	case 4: 
+    	day = "목요일";
+		break; 
+	case 5: 
+    	day = "금요일"; 
+		break; 
+	case 6: 
+    	day = "토요일"; 
+}
+
+// Shortly
+const days = [ 
+	"일요일",
+	"월요일",
+	"화요일",
+	"수요일",
+	"목요일",
+	"금요일",
+	"토요일"
+ ];
+
+// OR
+const days = 일요일,월요일,화요일,수요일,목요일,금요일,토요일.split( "," );
+
+const day = days[dateNumber];
+```
+
+---
+
+## **3\. 함수 호출 (Calls To Functions)**
+
+조건(삼항) 연산자(:)를 사용하여 조건에 따라 어떤 함수를 호출할지 결정할 수도 있습니다.
+
+함수들의 호출 패턴은 동일해야 하며, 그렇지 않으면 오류가 발생할 수 있습니다.
+
+```
+// Lengthy
+function f1() {
+// ...
+}
+function f2() {
+// ...
+}
+
+// Shortly
+condition ? f1() : f2();
+```
+
+---
+
+## **4\. 여러 문자열 확인 (Multiple String Checks)**
+
+하나의 문자열이 여러 값 중 하나와 일치하는지 확인해야 할 때가 많은데,
+
+이는 번거로운 작업 일 수 있습니다. 다행히도 JavaScript는 이를 도와주는 방법이 있습니다.
+
+```
+// Lengthy
+const isVowel = (letter) => {
+return (
+letter === "a" ||
+letter === "e" ||
+letter === "i" ||
+letter === "o" ||
+letter === "u"
+);
+};
+
+// Shortly
+const isVowel = letter => /[aeiou]/i.test(letter);
+```
+
+---
+
+## **5\. For-of와 For-in 루프 (For-of and For-in loops)**
+
+For-of와 For-in 루프는 배열이나 객체를 반복할 때 인덱스를 수동으로 추적하지 않고도 반복하는 데 유용합니다.
+
+#### **For-of**
+
+```
+const arr = [1, 2, 3, 4, 5];
+
+// Lengthy
+for (let i = 0; i < arr.length; i++) {
+const element = arr[i];
+// ...
+}
+
+// Shortly
+for (const element of arr) {
+// ...
+}
+
+For-in
+```
+
+#### **For-in**
+
+```
+const obj = {
+a: 1,
+b: 2,
+c: 3,
+};
+
+// Lengthy
+const keys = Object.keys(obj);
+for (let i = 0; i < keys.length; i++) {
+const key = keys[i];
+const value = obj[key];
+// ...
+}
+
+// Shortly
+for (const key in obj) {
+const value = obj[key];
+// ...
+}
+```
+
+---
+
+## **6\. 거짓 여부 확인 (False Checks)**
+
+변수가 null, undefined, 0, false, NaN, 빈 문자열인지 확인하려면 논리 연산자 NOT (!)를 사용하여 여러 조건을 검사할 필요 없이 확인할 수 있습니다.
+
+이렇게 하면 변수에 유효한 데이터가 들어 있는지 쉽게 확인할 수 있습니다.
+
+```
+// Lengthy
+const isFalsey = (value) => {
+if (
+value === null ||
+value === undefined ||
+value === 0 ||
+value === false ||
+value === NaN ||
+value === ""
+) {
+return true;
+}
+return false;
+};
+
+// Shortly
+const isFalsey = (value) => !value;
+```
+
+---
+
+## **7\. 삼항 연산자 (Secondary Operator)**
+
+JavaScript 개발자라면 삼항 연산자를 접해봤을 것입니다.
+
+간결한 if-else 문을 작성하는 좋은 방법입니다.
+
+이를 이용하여 여러 조건을 확인하고 체인으로 연결하는데도 사용할 수 있습니다.
+
+```
+// Lengthy
+let info;
+
+if (value < minValue) {
+info = "값이 너무 작습니다";
+} else if (value > maxValue) {
+info = "값이 너무 큽니다";
+} else {
+info = "값이 범위 안에 있습니다";
+}
+
+// Shortly
+const info =
+value < minValue
+? "값이 너무 작습니다"
+: value > maxValue ? "값이 너무 큽니다" : "값이 범위 안에 있습니다";
+```
+
+---
+
+## **8\. 쉼표 연산자** 
+
+쉼표 연산자(,)는 두 피연산자를 모두 평가한 후 오른쪽 피연산자의 값을 반환합니다. 쉼표 연산자는 주로 for 반복문 안에서 사용하여 한 번의 반복으로 여러 변수를 변경할 때 사용합니다. 꼭 필요하지 않다면, 그 외의 상황에 사용하는 것은 좋지 않은 코드 스타일로 여겨집니다. 대개 쉼표 연산자보다는 두 개의 분리된 명령문을 사용하는 편이 낫습니다.
+
+```
+const x = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+const a = [x, x, x, x, x];
+
+for (let i = 0, j = 9; i <= j; i++, j--);
+//                                   ^
+console.log('a[' + i + '][' + j + ']= ' + a[i][j]);
+
+// a[0][9]= 9
+// a[1][8]= 8
+// a[2][7]= 7
+// a[3][6]= 6
+// a[4][5]= 5
+```
+
+---
+
+## 9\. 배열(Array) 관련 트릭
+
+```
+let fruits = [“banana”, “apple”, “orange”, “watermelon”, “apple”, “orange”, “grape”, “apple”];
+```
+
+#### **1\. Array 중복 제거**
+
+new set()를 사용하여 두 가지 방법으로 중복을 제거할 수 있습니다.
+
+```
+// First method
+var uniqueFruits = Array.from(new Set(fruits));
+console.log(uniqueFruits); 
+
+// returns [“banana”, “apple”, “orange”, “watermelon”, “grape”]
+
+
+// Second method
+var uniqueFruits2 = […new Set(fruits)];
+console.log(uniqueFruits2); 
+
+// returns [“banana”, “apple”, “orange”, “watermelon”, “grape”]
+```
+
+#### **2\. Array 특정 값 바꾸기**
+
+Array.splice(start, value to remove, valueToAdd)
+
+수정을 시작할 위치, 변경하려는 값의 수 및 새 값을 지정하는 세 가지 매개 변수를 전달할 수 있습니다.
+
+```
+fruits.splice(0, 2, 'potato', 'tomato');
+// ['potato', 'tomato', 'orange', 'watermelon', 'apple', 'orange', 'grape', 'apple'];
+```
+
+#### **3.. map() 없이 배열 매핑하기**
+
+```
+const friends = [
+    { name: 'John', age: 22 },
+    { name: 'Peter', age: 23 },
+    { name: 'Mark', age: 24 },
+    { name: 'Maria', age: 22 },
+    { name: 'Monica', age: 21 },
+    { name: 'Martha', age: 19 },
+];
+const friendsNames = Array.from(friends, ({ name }) => name)
+// ['John', 'Peter', 'Mark', 'Maria', 'Monica', 'Martha']
+```
+
+#### **4\. Array 비우기**
+
+어떤 목적으로든 요소로 가득 찬 배열을 정리할 때 사용 합니다.
+
+```
+fruits.length = 0; 
+// []
+```
+
+#### **5\. Array를 Object로 변환하기**
+
+```
+let fruits = [“banana”, “apple”, “orange”, “watermelon”];
+const fruitsObj = { …fruits };
+console.log(fruitsObj); 
+// returns {0: “banana”, 1: “apple” ... }
+```
+
+#### **6\. 데이터로 배열 채우기**
+
+일부 데이터로 배열을 채우고 싶거나 동일한 값을 가진 배열이 필요할 때 사용 할 수 있습니다.
+
+```
+const newArray = new Array(10).fill('1');
+// ['1', '1', ...]
+```
+
+#### **7\. 배열 병합**
+
+.concat() 메서드를 사용하지 않고 배열들을 하나의 배열로 병합하는 방법이 있습니다. 
+
+```
+const fruits = [“apple”, “banana”, “orange”];
+const meat = [“poultry”, “beef”, “fish”];
+const vegetables = [“potato”, “tomato”, “cucumber”];
+const food = […fruits, …meat, …vegetables];
+console.log(food); 
+// [“apple”, “banana”, ... ]
+```
+
+#### **8\. 두 배열의 교차점 찾기**
+
+두 배열 모두에 표시된 값을 가진 배열을 얻을 때 사용 할 수 있습니다.
+
+```
+const numOne = [0, 2, 4, 6, 8, 8];
+const numTwo = [1, 2, 3, 4, 5, 6];
+const duplicatedValues = […new Set(numOne)].filter(item => numTwo.includes(item));
+console.log(duplicatedValues); 
+// returns [2, 4, 6]
+```
+
+#### **9\. 배열에서 잘못된 값 제거**
+
+Javascript에서 거짓 값은 false,0, "", null, NaN, undefined입니다. 이러한 종류의 값을. filter() 메서드를 사용하여 제거할 수 있습니다.
+
+```
+const mixedArr = [0, “blue”, “”, NaN, 9, true, undefined, “white”, false];
+const trueArr = mixedArr.filter(Boolean);
+console.log(trueArr); 
+// returns [“blue”, 9, true, “white”]
+```
+
+#### **10\. 배열에서 임의의 값 가져오기**
+
+배열에서 무작위 값을 선택해야 할 때 사용합니다.
+
+```
+const colors = [“blue”, “white”, “green”, “navy”, “pink”, “purple”, “orange”, “yellow”, “black”, “brown”];
+const randomColor = colors[(Math.floor(Math.random() * (colors.length)))]
+```
+
+#### **11.  .lastIndexOf() 사용 예시**
+
+배열에서 중복된 값이 있는 경우 .lastIndexOf() 메서드를 사용하여 마지막으로 발생한 위치를 찾을 수 있습니다.
+
+```
+const nums = [1, 5, 2, 6, 3, 5, 2, 3, 6, 5, 2, 7];
+const lastIndex = nums.lastIndexOf(5);
+console.log(lastIndex); 
+// returns 9
+```
+
+---
+
+## Reference
+
+[https://javascript.plainenglish.io/7-javascript-powerful-optimization-tricks-you-need-to-know-f0b5da2933de](https://javascript.plainenglish.io/7-javascript-powerful-optimization-tricks-you-need-to-know-f0b5da2933de)
+
+ [7 JavaScript Powerful Optimization Tricks You Need To Know
+
+Every language has uniqueness, and JavaScript, the most widely used programming language, is no different.
+
+javascript.plainenglish.io](https://javascript.plainenglish.io/7-javascript-powerful-optimization-tricks-you-need-to-know-f0b5da2933de)
+
+[https://developer.mozilla.org/ko/docs/Web/JavaScript/Guide/Expressions\_and\_operators](https://developer.mozilla.org/ko/docs/Web/JavaScript/Guide/Expressions_and_operators)
+
+ [표현식과 연산자 - JavaScript | MDN
+
+이번 장에서는 JavaScript의 표현식과 함께 할당, 비교, 산술, 비트 계산, 논리, 문자열, 삼항 등 다양한 연산자를 살펴보겠습니다.
+
+developer.mozilla.org](https://developer.mozilla.org/ko/docs/Web/JavaScript/Guide/Expressions_and_operators)
+
+[https://www.blog.duomly.com/13-useful-javascript-array-tips-and-tricks-you-should-know/?fbclid=IwAR3YuEviqaZ1ergMhmh3wxM6arYpReKpPFMpDhn4cpjOmeUlIVk0ymXq3-0](https://www.blog.duomly.com/13-useful-javascript-array-tips-and-tricks-you-should-know/?fbclid=IwAR3YuEviqaZ1ergMhmh3wxM6arYpReKpPFMpDhn4cpjOmeUlIVk0ymXq3-0 "13 Useful JavaScript Array Tips and Tricks You Should Know")
+
+ [13 useful JavaScript array tips and tricks you should know
+
+Today we will talk about javascript array tips and tricks. I would like to show you a few tricks which you may not know about and which may
+
+www.blog.duomly.com](https://www.blog.duomly.com/13-useful-javascript-array-tips-and-tricks-you-should-know/?fbclid=IwAR3YuEviqaZ1ergMhmh3wxM6arYpReKpPFMpDhn4cpjOmeUlIVk0ymXq3-0)
