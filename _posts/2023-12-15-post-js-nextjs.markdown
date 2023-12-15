@@ -1,0 +1,56 @@
+---
+layout: post
+title: "Next.js?"
+date: 2015-02-08T20:39:51-09:00
+modified: 2015-02-08T22:21:31-09:00
+categories: articles
+excerpt: "Next.js?"
+tags: [oowgnod]
+image:
+  feature: test.jpg
+  credit: Me
+  creditlink: me.org
+share: true
+comments: true
+---
+
+---
+
+### Next.js를 사용하면 무엇이 달라질까?
+
+많은 정보성 글들에서 React와 Next.js의 차이를 CSR과 SSR이며,
+
+단순히 SSR만을 위해 Next.js를 사용하는 것처럼 설명하지만 Next.js는 생각보다 많은 기능들을 지원합니다.
+
+Next.js 는 application을 만들기 위해 아래와 같은 것들이 필요하다고 말하는데
+
+[##_Image|kage@ZJej8/btsohYYwMWI/8J8ooJgMun01EKFn5SPz3K/img.png|CDM|1.3|{"originWidth":1280,"originHeight":668,"style":"alignCenter"}_##]
+
+([https://nextjs.org/learn/foundations/about-nextjs/what-is-nextjs)](https://nextjs.org/learn/foundations/about-nextjs/what-is-nextjs))
+
+-   **User Interface** - 사용자가 응용 프로그램을 사용하고 상호 작용하는 방법
+-   **Routing** - 사용자가 응용프로그램의 다른 부분을 탐색하는 방법
+-   **Data Fetching** - 데이터가 저장되는 위치와 데이터를 가져오는 방법
+-   **Rendering** - 정적 또는 동적 콘텐츠를 렌더링 하는 시기와 위치
+-   **Integrations** - 사용하는 타사 서비스(CMS, 인증, 결제 등)와 이러한 서비스에 연결하는 방법
+-   **Infrastructure** - 응용 프로그램 코드(서버리스, CDN, Edge 등)를 배포, 저장 및 실행
+-   **Performance** -최종 사용자를 위해 애플리케이션을 최적화하는 방법
+-   **Scalability** - 팀, 데이터 및 트래픽 증가에 따라 애플리케이션이 조정되는 방식
+-   **Developer Experience** - 응용프로그램을 만들고 유지 관리하는 팀의 경험
+
+---
+
+이 중 Rendering 부분에서 SSR 이 가능하기 때문에 여러 블로그 글들에서 단순히 SSR 만을 위해 Next.js를 사용한다고 설명합니다. ( SSR 외에도 SSG, ISR 도 지원합니다 )
+
+---
+
+**Next.js의 대표적인 기능들로는 다음과 같은 것들이 있습니다.**
+
+1.  **자동 코드 분할** : Next.js는 각 페이지에서 사용되는 컴포넌트를 기반으로 애플리케이션 코드를 자동으로 작은 번들로 분할하여 사용자가 현재 페이지에 필요한 코드만 다운로드하도록 합니다. 이로 인해 로딩 시간이 단축되고 성능이 향상됩니다.
+2.  **핫 모듈 교체** : Next.js는 핫 모듈 교체(HMR)를 지원하여 개발자들이 전체 페이지를 새로 고치지 않고도 애플리케이션의 변경 사항을 볼 수 있습니다. 이는 개발 경험을 크게 향상하고 개발 프로세스를 가속화합니다.
+3.  **자동 페이지 라우팅**: Next.js는 "pages" 디렉터리의 파일 구조를 기반으로 자동으로 페이지 라우팅을 처리합니다. 이를 통해 개발 프로세스가 간소화되고 수동으로 라우트를 구성할 필요가 없어집니다.
+4.  **통합된 API 개발** : Next.js는 개발자들이 애플리케이션 내에서 쉽게 서버리스 API 경로를 생성할 수 있도록 지원하여 풀 스택 애플리케이션 개발 프로세스를 간소화하고 프런트엔드와 백엔드 간의 원활한 통신을 가능하게 합니다.
+5.  **하이브리드 렌더링** : Next.js는 서버 사이드 렌더링(SSR)과 정적 사이트 생성(SSG)을 모두 지원하여 개발자들이 특정 사용 사례에 가장 적합한 방식을 선택하거나 하나의 애플리케이션 내에서 두 기술을 결합할 수 있습니다.
+6.  **내장된 CSS 및 JavaScript 지원** : Next.js에는 CSS 모듈 및 styled-components와 같은 인기 있는 CSS-in-JS 설루션에 대한 내장 지원이 포함되어 있습니다. 또한 ES 모듈과 동적 임포트와 같은 현대적인 JavaScript 기능을 지원합니다.
+7.  **확장성** : Next.js는 플러그인, 미들웨어, 사용자 정의 설정을 통해 쉽게 확장할 수 있도록 설계되었습니다. 이를 통해 개발자들은 프레임워크를 특정 요구에 맞게 맞춤화하고 다른 도구와 서비스통합할 수 있습니다.
+8.  **큰 규모의 활발한 커뮤니티** : Next.js에는 지속적으로 개발과 유지보수가 이루어지는 많은 개발자들로 이루어진 커뮤니티가 있습니다. 이 활발한 커뮤니티는 Next.js 애플리케이션의 기능을 확장하고 일반적인 개발 과제를 해결하기 위한 다양한 리소스, 제삼자 라이브러리, 도구를 제공합니다.
