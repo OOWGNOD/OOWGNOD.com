@@ -383,7 +383,3 @@ console.log(lastIndex);
 ```
 
 ---
-
-[www.blog.duomly.com](https://www.blog.duomly.com/13-useful-javascript-array-tips-and-tricks-you-should-know/?fbclid=IwAR3YuEviqaZ1ergMhmh3wxM6arYpReKpPFMpDhn4cpjOmeUlIVk0ymXq3-0)
-
----
