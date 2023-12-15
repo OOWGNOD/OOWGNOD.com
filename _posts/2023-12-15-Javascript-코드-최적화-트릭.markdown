@@ -1,20 +1,4 @@
 ---
-layout: post
-title: "Javascript 코드 최적화 트릭"
-date: 2015-02-08T20:39:51-09:00
-modified: 2015-02-08T22:21:31-09:00
-categories: articles
-excerpt: "Javascript 코드 최적화 트릭"
-tags: [oowgnod]
-image:
-  feature: test.jpg
-  credit: Me
-  creditlink: me.org
-share: true
-comments: true
----
-
----
 
 ## **1\. 대안 값 (Fallback Values)**
 
