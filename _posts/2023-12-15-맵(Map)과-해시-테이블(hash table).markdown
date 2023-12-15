@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "맵(Map)과 해시 테이블(hash table)"
+title: ""
 date: 2015-02-08T20:39:51-09:00
 modified: 2015-02-08T22:21:31-09:00
 categories: articles
