@@ -1,0 +1,129 @@
+회사 면접을 준비하며 이전에 만들었던 토이 프로젝트의 코드들을 살펴보는 도중 의문이 생겼습니다.
+
+다른 면접에서 해당 프로젝트의 물품이 많아지면 어떻게 개선할 수 있는지에 대해 질문이 왔었는데 
+
+너무 긴장한 나머지 이상한 답변을 했었기에 그것을 바로 잡고자 해당 코드의 개선사항을 찾아보았습니다.
+
+```
+const infoList = [
+    {
+      name: '반스 어센틱 레드',
+      desc: '무신사 최저가 기준 약 59,000원',
+    },
+    ....
+]
+```
+
+일단 스니커즈에 대한 데이터를 이런식으로 배열 안에 보관해 두고
+
+```
+const qnaList = [
+    {
+      q: '1. 어떤 상황에 신을 스니커즈가 필요하신가요?',
+      a: [
+        { answer: 'a. 중요한 자리에서 신을수 있었으면 좋겠어요!', type: [3, 7, 10, 11] },
+        { answer: 'b. 편하게 데일리 슈즈로 신고 싶어요!', type: [2, 1, 5, 6, 8, 9] },
+      ]
+    } ...
+```
+
+Q에 대해 선택된 A의 배열을 선택하면
+
+```
+let target = qnaList[qIdx].a[idx].type;
+            for(let i = 0; i < target.length; i++){
+                select[target[i]] += 1;
+            }
+```
+
+해당 type의 i 값을 select에 추가하고
+
+```
+const select: number[] = new Array(infoList.length).fill(0);
+
+function calResult(): number {
+    let result: number = select.indexOf(Math.max(...select));
+    return result;
+}
+```
+
+이렇게 가장 많이 선택된 요소의 인덱스를 찾아 리턴하는 방식입니다.
+
+---
+
+## 문제점
+
+첫 번째로 생각한 문제는 스니커즈의 종류가 굉장히 많아질 경우에는 a\[i\]. type의 값을 어떻게 관리할 것인가?
+
+현재에는 type부분에 답변에 해당하는 스니커즈가 배열에 몇 번째인지가 정해져 있다.
+
+사실상 이런 질문 답변의 경우는 사람이 직접 적어야 하기 때문에 배열에 몇 번째에 있는지 보다 직관적으로 해당 스니커즈의 이름이 어떤것인지가 더 보기에는 편할수 있다고 생각했습니다.
+
+```
+const qnaList = [
+    {
+      q: '1. 어떤 상황에 신을 스니커즈가 필요하신가요?',
+      a: [
+        { answer: 'a. 중요한 자리에서 신을수 있었으면 좋겠어요!', type:
+        ["이소(ITSO) 머큐리 트리플 화이트",
+        "커먼프로젝트 아킬레스 로우",
+        "아디다스 독일군",
+        "뉴발란스 237 그레이"
+        ] },
+        { answer: 'b. 편하게 데일리 슈즈로 신고 싶어요!', type: [" ... ,"] },
+      ]
+    },
+    ]
+```
+
+하지만 이렇게 되는 경우 select 배열에 몇번째 물품이 선택되었는지를 직접 추가하는 로직을 사용할수 없습니다.  
+  
+
+## 개선
+
+```
+const select: string[] = [];
+
+let target = qnaList[qIdx].a[idx].type;
+            for (const answerIndex of answerIndices) {
+    const selectedNames = qnaList[answerIndex].a[answerIndex].type;
+    selectedItems.push(...selectedNames);
+  } ...
+            
+function calResult(): number {
+    const itemCount : any{} = {};
+	// console.log(itemCount)
+    // {"뉴발란스 993 그레이" : 1, "반스 어센틱 레드" : 2 ...}
+  for (const item of selectedItems) {
+    if (itemCount[item] === undefined) {
+      itemCount[item] = 1;
+    } else {
+      itemCount[item]++;
+    }
+  }
+
+  let maxSelectedValue : number = -Infinity;
+  let maxSelectedItem : string = '';
+
+  for (const [item, count] of Object.entries(itemCount)) {
+    if (count > maxSelectedValue) {
+      maxSelectedValue = count;
+      maxSelectedItem = item;
+    }
+  }
+
+  return maxSelectedItem;
+}
+```
+
+이렇게 개선 해보았습니다.
+
+답변이 선택될 때마다 그 답변에 type 값을 배열에 추가하고 그 배열안에 해당 스니커즈가 몇번 선택됐는지를 카운트하도록 변경하였습니다.
+
+---
+
+## 결론
+
+단순한 설문조사형 토이 프로젝트였지만 다시 살펴보니 개선해야 할 곳도 많고 협업을 했었다면 더 빨리 문제점을 파악해서 개선했어야 하는 코드가 보여 안타까웠지만 일정 부분을 수정하며 많은 공부가 되었습니다.
+
+이후 속도 개선이나 result페이지들이 html파일로 하드코딩 되어있어 Next.js 등으로 옮기며 해당 부분을 Dynamic route 등으로 개선하면 더 좋은 프로젝트가 될 수 있을 것 같습니다.
